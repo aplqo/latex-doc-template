@@ -1,0 +1,26 @@
+trigger:
+  branches:
+    include:
+      - master
+      - term
+  tags:
+    include:
+      - v*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - script: |
+      sudo apt-get install -y texlive-full
+      sudo apt-get install -y latexmk
+    displayName: install
+  - script: |
+      make
+    displayName: build
+  - task: GitHubRelease@0
+    inputs:
+      gitHubConnection: aplqo
+      repositoryName: aplqo/$(repository_name)
+      action: create
+      assets: ./*.pdf
