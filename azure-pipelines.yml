@@ -22,6 +22,8 @@ steps:
     inputs:
       gitHubConnection: aplqo
       repositoryName: aplqo/$(repository_name)
+      target: '$(Build.SourceVersion)'
+      tagSource: 'auto'
       action: create
       assets: ./*.pdf
   - task: PublishPipelineArtifact@1
