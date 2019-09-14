@@ -1,4 +1,7 @@
 trigger:
+  branches:
+    include:
+      - latest
   tags:
     include:
       - v*
@@ -15,8 +18,12 @@ steps:
       make
     displayName: build
   - task: GitHubRelease@0
+    condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/v')
     inputs:
       gitHubConnection: aplqo
       repositoryName: aplqo/$(repository_name)
       action: create
       assets: ./*.pdf
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: ./*.pdf
