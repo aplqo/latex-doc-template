@@ -32,6 +32,9 @@ steps:
       releaseNotesFile: ReleaseNote.md
       addChangeLog: true
       compareWith: 'lastFullRelease'
+  - script: |
+      mkdir pdf
+      cp *.pdf pdf/
   - task: PublishPipelineArtifact@1
     inputs:
-      targetPath: ./*.pdf
+      targetPath: ./pdf
