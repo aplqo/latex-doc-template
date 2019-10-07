@@ -15,6 +15,8 @@ steps:
   - script: |
       sudo apt-get install -y texlive-full
       sudo apt-get install -y latexmk
+      sudo apt-get install -y fonts-noto-cjk
+      bash ./template/fonts.sh
     displayName: install
   - script: |
       make
